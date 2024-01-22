@@ -1,0 +1,10 @@
+name: Test Closed Issue Trigger
+on:
+  issues:
+    types: closed
+jobs:
+  close-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Close Comment for the issue
+        run: echo "Issue is Solved and Closed Thanks"
