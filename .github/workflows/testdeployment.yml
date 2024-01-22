@@ -1,0 +1,44 @@
+name: Test My Project
+on: push
+jobs:
+  lint-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the Code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Dependancies
+        run: npm ci
+      - name: Run Lint
+        run: npm lint
+  test-job:
+    needs: lint-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the Code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Dependancies
+        run: npm ci
+      - name: Run Project Tests
+        run: npm test
+  deploy-job:
+    needs: test-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the Code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Dependancies
+        run: npm ci
+      - name: Deploy the Project
+        run: echo "Project Deployed Successfully"
